@@ -1563,3 +1563,97 @@ section h4 {
     font-size: 36px !important;
     font-weight: 900 !important;
 }
+/* ===== LOGIN FIRST SYSTEM ===== */
+
+body:not(.logged-in) .main-navigation {
+    display: none !important;
+}
+
+body:not(.logged-in) main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px !important;
+}
+
+body:not(.logged-in) main > :not(.login-section) {
+    display: none !important;
+}
+
+body:not(.logged-in) .login-section {
+    display: block !important;
+    width: 100%;
+    max-width: 600px;
+    margin: auto !important;
+    padding: 40px !important;
+    background: #14263A !important;
+    border: 1px solid #38536F !important;
+    border-radius: 16px !important;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.4);
+    color: white !important;
+}
+
+body:not(.logged-in) .login-section h2,
+body:not(.logged-in) .login-section h3,
+body:not(.logged-in) .login-section label {
+    color: white !important;
+}
+
+body:not(.logged-in) .login-section input,
+body:not(.logged-in) .login-section select {
+    background: white !important;
+    color: #14263A !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+body:not(.logged-in) .login-section button {
+    width: 100%;
+    background: #FFB000 !important;
+    color: #10243A !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    padding: 15px !important;
+}
+
+/* AFTER SUCCESSFUL LOGIN */
+
+body.logged-in .login-section {
+    display: none !important;
+}
+
+body.logged-in .main-navigation {
+    display: flex !important;
+}
+/* FIX FCFS AND OPTIMIZED SCHEDULING VALUES */
+
+.fcfs-section p,
+.optimized-section p,
+.fcfs-section p span,
+.optimized-section p span {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.fcfs-section p strong,
+.optimized-section p strong {
+    color: #ffb800 !important;
+    font-weight: 800 !important;
+}
+/* HIDE COMPLETE WEBSITE BEFORE LOGIN */
+body:not(.logged-in) > *:not(.login-section) {
+    display: none !important;
+}
+
+/* SHOW ONLY LOGIN PAGE */
+body:not(.logged-in) > .login-section {
+    display: block !important;
+    min-height: 100vh;
+}
+
+/* HIDE LOGIN AFTER SUCCESSFUL LOGIN */
+body.logged-in > .login-section {
+    display: none !important;
+}

@@ -462,25 +462,29 @@ document.getElementById("refreshReport").addEventListener("click",function(){
         " requests have scheduling conflicts. The system currently manages "+
         totalAssets+" assets across "+totalDepartments+" departments.";
 });
-document.getElementById("loginForm").addEventListener("submit",function(event){
+document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const username=document.getElementById("loginUsername").value.trim();
-    const password=document.getElementById("loginPassword").value;
-    const role=document.getElementById("loginRole").value;
-    const message=document.getElementById("loginMessage");
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const role = document.getElementById("loginRole").value;
+    const message = document.getElementById("loginMessage");
 
-    if(username==="admin" && password==="admin123" && role==="Admin"){
-        message.textContent="Admin Login Successful!";
-        message.style.color="green";
+    if (username === "admin" && password === "admin123" && role === "Admin") {
+        sessionStorage.setItem("railwayLoggedIn", "true");
+        document.body.classList.add("logged-in");
+        message.textContent = "Admin Login Successful!";
+        message.style.color = "green";
     }
-    else if(username==="department" && password==="dept123" && role==="Department"){
-        message.textContent="Department Login Successful!";
-        message.style.color="green";
+    else if (username === "department" && password === "dept123" && role === "Department") {
+        sessionStorage.setItem("railwayLoggedIn", "true");
+        document.body.classList.add("logged-in");
+        message.textContent = "Department Login Successful!";
+        message.style.color = "green";
     }
-    else{
-        message.textContent="Invalid username, password or role!";
-        message.style.color="red";
+    else {
+        message.textContent = "Invalid username, password or role!";
+        message.style.color = "red";
     }
 });
 // STEP 21: SAVE PROJECT DATA IN BROWSER
@@ -708,3 +712,103 @@ async function loadRailwayAssets() {
 }
 
 document.addEventListener("DOMContentLoaded", loadRailwayAssets);
+// LOGIN PAGE INITIALIZATION
+document.addEventListener("DOMContentLoaded", function() {
+    if (sessionStorage.getItem("railwayLoggedIn") === "true") {
+        document.body.classList.add("logged-in");
+    } else {
+        document.body.classList.remove("logged-in");
+    }
+});
+// ADD NEW RAILWAY ASSET
+const assetForm = document.getElementById("assetForm");
+
+if (assetForm) {
+    assetForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const assetId = document.getElementById("newAssetId").value.trim();
+        const assetName = document.getElementById("newAssetName").value.trim();
+        const assetType = document.getElementById("newAssetType").value;
+        const location = document.getElementById("newAssetLocation").value.trim();
+        const status = document.getElementById("newAssetStatus").value;
+
+        if (!assetId || !assetName || !assetType || !location) {
+            alert("Please fill all asset details!");
+            return;
+        }
+
+        const table = document.getElementById("assetTable");
+
+        const existingAssets = Array.from(table.querySelectorAll("tr"));
+
+        const duplicate = existingAssets.some(row =>
+            row.cells[0].textContent.trim().toLowerCase() === assetId.toLowerCase()
+        );
+
+        if (duplicate) {
+            alert("Asset ID already exists!");
+            return;
+        }
+
+        const newRow = table.insertRow();
+
+        newRow.innerHTML = `
+            <td>${assetId}</td>
+            <td>${assetName}</td>
+            <td>${assetType}</td>
+            <td>${location}</td>
+            <td>${status}</td>
+        `;
+
+        assetForm.reset();
+
+        alert("New Railway Asset Added Successfully!");
+    });
+}
+    // DEPARTMENT MANAGEMENT
+const departmentForm = document.getElementById("departmentForm");
+
+if (departmentForm) {
+    departmentForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const id = document.getElementById("departmentId").value.trim();
+        const name = document.getElementById("departmentName").value;
+        const head = document.getElementById("departmentHead").value.trim();
+        const contact = document.getElementById("departmentContact").value.trim();
+
+        if (!id || !name || !head || !contact) {
+            alert("Please fill all department details!");
+            return;
+        }
+
+        const table = document.getElementById("departmentTable");
+
+        if (!table) {
+            alert("Department table not found!");
+            return;
+        }
+
+        const duplicate = Array.from(table.querySelectorAll("tr")).some(row =>
+            row.cells[0].textContent.trim().toLowerCase() === id.toLowerCase()
+        );
+
+        if (duplicate) {
+            alert("Department ID already exists!");
+            return;
+        }
+
+        const newRow = table.insertRow();
+
+        [id, name, head, contact].forEach(value => {
+            const cell = newRow.insertCell();
+            cell.textContent = value;
+        });
+
+        departmentForm.reset();
+        alert("Department Added Successfully!");
+    });
+}
+
+ 

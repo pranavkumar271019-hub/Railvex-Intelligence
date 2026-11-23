@@ -224,8 +224,7 @@
             </tbody>
         </table>
     </div>
-</section>
-<section class="department-section" id="departments">
+    <section class="department-section" id="departments">
     <h2>Department Management</h2>
     <p class="section-subtitle">Manage all railway maintenance departments centrally</p>
 
@@ -233,34 +232,70 @@
         <div class="form-grid">
             <div>
                 <label>Department ID</label>
-                <input type="text" id="deptId" placeholder="DEP-101" required>
+                <input type="text" id="departmentId" placeholder="DEP-104" required>
             </div>
 
             <div>
                 <label>Department Name</label>
-                <select id="deptName" required>
+                <select id="departmentName" required>
                     <option value="">Select Department</option>
-                    <option>Track Department</option>
-                    <option>Signal Department</option>
-                    <option>Electrical Department</option>
-                    <option>Mechanical Department</option>
-                    <option>Civil Engineering Department</option>
+                    <option value="Track Department">Track Department</option>
+                    <option value="Signal Department">Signal Department</option>
+                    <option value="Electrical Department">Electrical Department</option>
+                    <option value="Mechanical Department">Mechanical Department</option>
+                    <option value="Civil Engineering Department">Civil Engineering Department</option>
                 </select>
             </div>
 
             <div>
                 <label>Department Head</label>
-                <input type="text" id="deptHead" placeholder="Enter Department Head" required>
+                <input type="text" id="departmentHead" placeholder="Enter Department Head" required>
             </div>
 
             <div>
                 <label>Contact Number</label>
-                <input type="tel" id="deptContact" placeholder="Enter Contact Number" required>
+                <input type="tel" id="departmentContact" placeholder="Enter Contact Number" required>
             </div>
         </div>
 
         <button type="submit">Add Department</button>
     </form>
+
+    <h2>Registered Departments</h2>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Department ID</th>
+                    <th>Department Name</th>
+                    <th>Department Head</th>
+                    <th>Contact Number</th>
+                </tr>
+            </thead>
+            <tbody id="departmentTable">
+                <tr>
+                    <td>DEP-101</td>
+                    <td>Track Department</td>
+                    <td>Raj Kumar</td>
+                    <td>9876543210</td>
+                </tr>
+                <tr>
+                    <td>DEP-102</td>
+                    <td>Signal Department</td>
+                    <td>Amit Sharma</td>
+                    <td>9876543211</td>
+                </tr>
+                <tr>
+                    <td>DEP-103</td>
+                    <td>Electrical Department</td>
+                    <td>Rahul Singh</td>
+                    <td>9876543212</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
     <h2>Registered Departments</h2>
 
